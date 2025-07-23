@@ -1,12 +1,14 @@
 #! /bin/bash
 sudo apt update
-sudo apt install -y python3-pip
-pip3 install flask
-echo 'from flask import Flask
-app = Flask(__name__)
-@app.route("/")
-def hello():
-    return "Hello from GitHub Actions and GCP VM!"
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8080)' > app.py
+sudo apt install -y python3-pip git
+
+# Clone your repo to get app.py and requirements.txt
+cd /home
+git clone https://github.com/Praveenarumugam07/auth-repo.git
+cd auth-repo
+
+# Install dependencies
+pip3 install -r requirements.txt
+
+# Run the app in background
 nohup python3 app.py &
